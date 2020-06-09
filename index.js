@@ -117,8 +117,8 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 const variableInterestRate =(name,P,I,N,creditScore) => {
 
     for(let i = 0; i < 10;i++){
-        console.log(name + ", with an interest rate of " + I + " , your monthly rate is " + Math.round(monthlyRate)) 
-         I+= 0.05;
+        console.log(name + ", with an interest rate of " + (I.toFixed(2)) + " , your monthly rate is " + Math.round(monthlyRate)) 
+        I+= 0.05;         
          if(creditScore>740){
             monthlyRate=(P*(I/12*Math.pow((1+I/12),N*12))/(Math.pow((1+I/12),N*12)-1))*0.95;
         }else if (creditScore<=740 && creditScore>=660){

@@ -3,8 +3,10 @@
 // 🏡 Task 1: Variables
 /* Create variables for principal, interest rate, and years. Assign them the values 200000, 0.05, and 30 respectively. Create another value called name and give it the value of your own name.
 */
-
-
+let principal = 200000;
+let interestRate = 0.05;
+let years = 30;
+let name = "Julliann";
 
 
 
@@ -14,7 +16,8 @@
 (1) Create a variable called `monthlyInterestRate` and give it the value of interest rate divided by 12. 
 (2) Create another variable called `periods` and give it the value of years*12.
 */
-
+let monthlyInterestRate = interestRate/12;
+let periods = years*12;
 
 
 
@@ -35,8 +38,11 @@ Hint #2: you'll need to use the `math` object for parts of this calculation!
 
 When your math is correct, monthlyRate will equal 1073.64
 */
+let monthlyRate = principal*(monthlyInterestRate*Math.pow((1+monthlyInterestRate),periods))/(Math.pow((1+monthlyInterestRate),periods)-1);
 
-
+let P = principal;
+let I = interestRate;
+let N = years;
 
 
 // 🏡 Task 3: Function
@@ -44,6 +50,11 @@ When your math is correct, monthlyRate will equal 1073.64
 
 If your name is `Oscar` mortgageCalculator() should return "Oscar, your monthly rate is 1073.64"
 */
+
+let mortgageCalculator= (name) => {
+    console.log(name + ", your monthly rate is 1073.64");
+}
+
 
 
 
@@ -56,23 +67,40 @@ For example,
 mortgageCalculator(200000, 0.05, 30); <-- should return 1,073.64
 */
 
+ mortgageCalculator= (P,I,N) => {
+     monthlyRate=P*(I/12*Math.pow((1+I/12),N*12))/(Math.pow((1+I/12),N*12)-1);
+    console.log('Your monthly rate is ' + monthlyRate);
+}
 
-
-
+//mortgageCalculator(400000, 0.05, 30);
 
 // 🏡 Task 5: Conditionals
 /* Add another paramter to your function called credit score. This parameter will be a number between 0 and 800 (a credit score).
 
-Then, add control flow within your function such that IF creditScore is above 740, interest rate drops by 0.5%, if credit score is below 660, interest rate increases by 0.5% and if credit score is anywhere between 660 and 740 interest rate doesn't change.
+Then, add control flow within your function such that IF creditScore is above 740, interest rate drops by 0.5%, if credit score is below 660, interest rate increases by 0.5% and if credit 
+score is anywhere between 660 and 740 interest rate doesn't change.
 
 Hint: To drop an interest rate by 5% you can take monthlyRate and multiply it by 0.95. Similarly, to increase an interest rate by 5% you'd do monthlyRate * 1.05. 
 */
-
+mortgageCalculator= (P,I,N,creditScore) => {
+    if(creditScore>740){
+        monthlyRate=(P*(I/12*Math.pow((1+I/12),N*12))/(Math.pow((1+I/12),N*12)-1))*0.95;
+    }else if (creditScore<=740 && creditScore>=660){
+        monthlyRate=(P*(I/12*Math.pow((1+I/12),N*12))/(Math.pow((1+I/12),N*12)-1));
+    }else{
+        monthlyRate=(P*(I/12*Math.pow((1+I/12),N*12))/(Math.pow((1+I/12),N*12)-1))*1.05;
+    }
+    
+   console.log('Your monthly rate is ' + monthlyRate);
+}
 
 
 
 // 🏡 Task 6: Loops
-/* Write a new function called variableInterestRate. This function should be the same as mortgageCalculator, except it should console.log the monthly payment for 10 different interest rates at 0.5% increments plus or minus 2% from the inputted interest rate. Complete these calculations using a for loop.
+/* Write a new function called variableInterestRate.
+ This function should be the same as mortgageCalculator, except it should console.log the monthly 
+ payment for 10 different interest rates at 0.5% increments plus or minus 2% from the inputted interest rate.
+  Complete these calculations using a for loop.
 
 For example, variableInterestRate(200000, 0.04, 30) should console.log:
 
@@ -86,6 +114,23 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 "{Name}, with an interest rate of 0.055, your monthly rate is $1136"
 "{Name}, with an interest rate of 0.06, your monthly rate is $1199"
 */
+const variableInterestRate =(name,P,I,N,creditScore) => {
+
+    for(let i = 0; i < 10;i++){
+        console.log(name + ", with an interest rate of " + (I.toFixed(2)) + " , your monthly rate is " + Math.round(monthlyRate)) 
+        I+= 0.05;         
+         if(creditScore>740){
+            monthlyRate=(P*(I/12*Math.pow((1+I/12),N*12))/(Math.pow((1+I/12),N*12)-1))*0.95;
+        }else if (creditScore<=740 && creditScore>=660){
+            monthlyRate=(P*(I/12*Math.pow((1+I/12),N*12))/(Math.pow((1+I/12),N*12)-1));
+        }else{
+            monthlyRate=(P*(I/12*Math.pow((1+I/12),N*12))/(Math.pow((1+I/12),N*12)-1))*1.05;
+        }
+    }
+     
+}
+
+variableInterestRate('Julliann',200000, 0.04, 30, 660);
 
 
 
